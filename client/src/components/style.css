@@ -1,0 +1,27 @@
+.urlListContainer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
+}
+
+.urlInputContainer {
+  display: flex;
+}
+
+.urlInput {
+  width: 80%;
+  margin-right: 2rem;
+}
+
+.urlSubmitButton {
+  width: 20%;
+  height: 5%;
+}
