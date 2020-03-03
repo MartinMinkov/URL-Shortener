@@ -7,7 +7,7 @@ export default (state = {}, action) => {
     case CREATE_URL:
       return { ...state, [action.payload.id]: action.payload };
     case FETCH_URLS:
-      return { ...state, ..._.mapKeys(action.payload, "id") };
+      return { ...state, ..._.mapKeys(action.payload, "_id") };
     default:
       return state;
   }

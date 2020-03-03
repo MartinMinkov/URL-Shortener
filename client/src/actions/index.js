@@ -15,12 +15,19 @@ export const signOut = () => {
 };
 
 export const createURL = formValues => async (dispatch, getState) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
   const { userId } = getState().auth;
-  const response = await urls.post("/urls", { formValues, userId });
+  const { url } = formValues;
+  const body = JSON.stringify({ slug: url, userId });
+  const response = await urls.post("/urls", body, config);
   dispatch({ type: CREATE_URL, payload: response.data });
 };
 
-export const fetchURL = () => async dispatch => {
+export const fetchURLS = () => async dispatch => {
   const response = await urls.get("/urls");
   dispatch({ type: FETCH_URLS, payload: response.data });
 };
