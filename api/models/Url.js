@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 
 const UrlSchema = new mongoose.Schema({
   userId: {
-    type: String,
-    unique: true
+    type: String
   },
   slug: {
     type: String,

@@ -7,8 +7,14 @@ const Url = require("../../models/Url");
 // @route   GET api/urls
 // @desc    Get a URL
 // @access  public
-router.get("/", (req, res) => {
-  res.send("URL Route");
+router.get("/", async (req, res) => {
+  try {
+    const urls = await Url.find().sort({ date: -1 });
+    res.json(urls);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Sever error");
+  }
 });
 
 // @route   POST api/urls
@@ -31,11 +37,11 @@ router.post(
         count: 0
       });
       await url.save();
+      res.json(url);
     } catch (err) {
       console.log(err.message);
       res.status(500).send("Sever error");
     }
-    res.send("URL registered");
   }
 );
 
