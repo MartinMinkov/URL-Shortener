@@ -23,7 +23,6 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
     const { slug, userId } = req.body;
-    console.log(slug, userId);
 
     try {
       const url = new Url({
