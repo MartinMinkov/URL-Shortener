@@ -47,4 +47,19 @@ router.post(
   }
 );
 
+router.get("/:slug", async (req, res) => {
+  try {
+    const url = await Url.findOne({ slug: req.params.slug });
+    if (!url) {
+      return res.status(404).json({ msg: "Not valid URL" });
+    }
+    url.count += 1;
+    await url.save();
+    res.status(200).redirect(`${url.destination}`);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Sever error");
+  }
+});
+
 module.exports = router;
