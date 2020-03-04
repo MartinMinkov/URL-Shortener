@@ -6,13 +6,15 @@ const UrlSchema = new mongoose.Schema({
   },
   slug: {
     type: String,
-    required: true
+    unique: true
   },
   destination: {
-    type: String
+    type: String,
+    required: true
   },
   count: {
-    type: Number
+    type: Number,
+    default: 0
   }
 });
 

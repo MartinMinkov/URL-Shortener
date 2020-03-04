@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator/check");
+const randomstring = require("randomstring");
 
 const Url = require("../../models/Url");
 
 // @route   GET api/urls
-// @desc    Get a URL
+// @desc    Get URLs
 // @access  public
 router.get("/", async (req, res) => {
   try {
@@ -22,19 +23,20 @@ router.get("/", async (req, res) => {
 // @access  public
 router.post(
   "/",
-  [check("slug", "Valid URL is required").isURL()],
+  [check("destination", "Valid URL is required").isURL()],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { slug, userId } = req.body;
+    const { destination, userId } = req.body;
+    const slug = randomstring.generate(6);
 
     try {
       const url = new Url({
+        destination,
         slug,
-        userId,
-        count: 0
+        userId
       });
       await url.save();
       res.json(url);
