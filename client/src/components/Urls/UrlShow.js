@@ -1,4 +1,5 @@
 import React from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "react-redux";
 import { fetchURLS } from "../../actions";
 
@@ -12,14 +13,18 @@ class UrlShow extends React.Component {
       return (
         <div className='urlListContainer' key={url._id}>
           <div>
+            <a className='ui grey header'>{url.destination}</a>
+          </div>
+          <div>
             <a className='ui grey header'>{url.slug}</a>
           </div>
           <div>
-            <a className='ui grey header'>url.123ve</a>
-          </div>
-          <div>
             <div className='ui grey small header'>Count: {url.count}</div>
-            <div className='ui content button primary'>Copy</div>
+            <CopyToClipboard
+              text={`http://localhost:5000/api/urls/${url.slug}`}
+            >
+              <div className='ui content button primary'>Copy</div>
+            </CopyToClipboard>
           </div>
         </div>
       );

@@ -22,7 +22,7 @@ export const createURL = formValues => async (dispatch, getState) => {
   };
   const { userId } = getState().auth;
   const { url } = formValues;
-  const body = JSON.stringify({ slug: url, userId });
+  const body = JSON.stringify({ destination: url, userId });
   const response = await urls.post("/urls", body, config);
   dispatch({ type: CREATE_URL, payload: response.data });
 };
