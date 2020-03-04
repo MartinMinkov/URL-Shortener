@@ -5,7 +5,11 @@ import { createURL } from "../../actions";
 
 class UrlCreate extends React.Component {
   onSubmit = propsValues => {
-    this.props.createURL(propsValues);
+    if (this.props.isSignedIn) {
+      this.props.createURL(propsValues);
+    } else {
+      console.log("Need to be signed in");
+    }
   };
 
   renderError = ({ error, touched }) => {
@@ -73,11 +77,15 @@ const validURL = str => {
   return !!pattern.test(str);
 };
 
+const mapStateToProps = state => {
+  return { isSignedIn: state.auth.isSignedIn };
+};
+
 const formWrapped = reduxForm({
   form: "urlCreate",
   validate
 })(UrlCreate);
 
-export default connect(null, {
+export default connect(mapStateToProps, {
   createURL
 })(formWrapped);
