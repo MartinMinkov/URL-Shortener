@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const app = express();
 connectDB();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
 // Init Middleware
 app.use(

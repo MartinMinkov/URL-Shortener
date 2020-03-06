@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t mminkov/URL-Shortener -f Dockerfile.dev .
+
+script:
+  - docker run mminkov/URL-Shortener run test -- --coverage

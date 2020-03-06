@@ -21,7 +21,7 @@ class UrlShow extends React.Component {
           <div>
             <div className='ui grey small header'>Count: {url.count}</div>
             <CopyToClipboard
-              text={`http://localhost:5000/api/urls/${url.slug}`}
+              text={`http://localhost:3001/api/urls/${url.slug}`}
             >
               <div className='ui content button primary'>Copy</div>
             </CopyToClipboard>
