@@ -4,12 +4,38 @@ import { connect } from "react-redux";
 import { fetchURLS, deleteURL } from "../../actions";
 
 class UrlShow extends React.Component {
+  state = {
+    copyPressed: false
+  };
+
   componentDidMount() {
     this.props.fetchURLS();
   }
 
   onDeleteClick = urlId => {
     this.props.deleteURL(urlId);
+  };
+
+  renderCopyConfirmation = () => {
+    if (this.state.copyPressed) {
+      return (
+        <div className='elementToFadeInAndOut ui positive message'>
+          <i
+            onClick={() => this.setState({ copyPressed: false })}
+            className='close icon'
+          ></i>
+          <div className='header'>Copied! :)</div>
+        </div>
+      );
+    }
+  };
+
+  showCopyConfirmation = () => {
+    this.setState({ copyPressed: true }, () => {
+      setTimeout(() => {
+        this.setState({ copyPressed: false });
+      }, 3000);
+    });
   };
 
   renderList = () => {
@@ -27,7 +53,12 @@ class UrlShow extends React.Component {
             <CopyToClipboard
               text={`http://localhost:3001/api/urls/${url.slug}`}
             >
-              <div className='ui content button primary'>Copy</div>
+              <div
+                onClick={() => this.showCopyConfirmation()}
+                className='ui content button primary'
+              >
+                Copy
+              </div>
             </CopyToClipboard>
           </div>
           <div onClick={() => this.onDeleteClick(url._id)} className='icon'>
@@ -40,7 +71,10 @@ class UrlShow extends React.Component {
 
   render() {
     return (
-      <div className='ui middle aligned divided list'>{this.renderList()}</div>
+      <div className='ui middle aligned divided list'>
+        {this.renderCopyConfirmation()}
+        {this.renderList()}
+      </div>
     );
   }
 }

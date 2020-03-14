@@ -28,7 +28,7 @@
 }
 
 .truncate {
-  width: 250px;
+  width: 30rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -37,4 +37,19 @@
 .icon {
   align-self: flex-start;
   justify-self: flex-end;
+}
+
+.elementToFadeInAndOut {
+  opacity: 1;
+  animation: 3s linear 1s;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
