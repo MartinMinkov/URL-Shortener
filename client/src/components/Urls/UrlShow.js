@@ -1,12 +1,16 @@
 import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { connect } from "react-redux";
-import { fetchURLS } from "../../actions";
+import { fetchURLS, deleteURL } from "../../actions";
 
 class UrlShow extends React.Component {
   componentDidMount() {
     this.props.fetchURLS();
   }
+
+  onDeleteClick = urlId => {
+    this.props.deleteURL(urlId);
+  };
 
   renderList = () => {
     return this.props.urls.map(url => {
@@ -26,6 +30,9 @@ class UrlShow extends React.Component {
               <div className='ui content button primary'>Copy</div>
             </CopyToClipboard>
           </div>
+          <div onClick={() => this.onDeleteClick(url._id)} className='icon'>
+            <i className='ui large close icon'></i>
+          </div>
         </div>
       );
     });
@@ -42,4 +49,7 @@ const mapStateToProps = state => {
   return { urls: Object.values(state.urls) };
 };
 
-export default connect(mapStateToProps, { fetchURLS })(UrlShow);
+export default connect(mapStateToProps, {
+  fetchURLS,
+  deleteURL
+})(UrlShow);

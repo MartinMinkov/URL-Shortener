@@ -1,5 +1,5 @@
 import urls from "../apis/urls";
-import { SIGN_IN, SIGN_OUT, CREATE_URL, FETCH_URLS } from "./types";
+import { SIGN_IN, SIGN_OUT, CREATE_URL, FETCH_URLS, DELETE_URL } from "./types";
 
 export const signIn = userId => {
   return {
@@ -34,6 +34,11 @@ export const fetchURLS = () => async (dispatch, getState) => {
       userId
     }
   });
-  console.log(response);
   dispatch({ type: FETCH_URLS, payload: response.data });
+};
+
+export const deleteURL = urlId => async dispatch => {
+  await urls.delete(`/urls/${urlId}`);
+  console.log("URLID", urlId);
+  dispatch({ type: DELETE_URL, payload: urlId });
 };

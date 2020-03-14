@@ -48,6 +48,9 @@ router.post(
   }
 );
 
+// @route   GET api/urls/:slug
+// @desc    Get a URL
+// @access  public
 router.get("/:slug", async (req, res) => {
   try {
     const url = await Url.findOne({ slug: req.params.slug });
@@ -57,6 +60,19 @@ router.get("/:slug", async (req, res) => {
     url.count += 1;
     await url.save();
     res.status(200).redirect(`${url.destination}`);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Sever error");
+  }
+});
+
+// @route   DELETE api/urls/:id
+// @desc    Delete a URL
+// @access  public
+router.delete("/:id", async (req, res) => {
+  try {
+    await Url.deleteOne({ _id: req.params.id });
+    res.status(200).send();
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Sever error");
