@@ -28,13 +28,7 @@ export const createURL = formValues => async (dispatch, getState) => {
 };
 
 export const fetchURLS = () => async (dispatch, getState) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
   const { userId } = getState().auth;
-  const body = JSON.stringify({ userId });
   const response = await urls.get("/urls", {
     params: {
       userId

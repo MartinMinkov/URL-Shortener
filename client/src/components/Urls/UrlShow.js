@@ -12,7 +12,7 @@ class UrlShow extends React.Component {
     return this.props.urls.map(url => {
       return (
         <div className='urlListContainer' key={url._id}>
-          <div>
+          <div className='truncate'>
             <a className='ui grey header'>{url.destination}</a>
           </div>
           <div>

@@ -25,3 +25,10 @@
   width: 20%;
   height: 5%;
 }
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

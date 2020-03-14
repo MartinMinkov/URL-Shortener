@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { CREATE_URL, FETCH_URLS, SIGN_OUT, SIGN_IN } from "../actions/types";
+import { CREATE_URL, FETCH_URLS, SIGN_OUT } from "../actions/types";
 
 export default (state = {}, action) => {
   switch (action.type) {
