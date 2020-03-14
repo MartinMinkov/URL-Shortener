@@ -10,7 +10,8 @@ const Url = require("../../models/Url");
 // @access  public
 router.get("/", async (req, res) => {
   try {
-    const urls = await Url.find().sort({ date: -1 });
+    const { userId } = req.query;
+    const urls = await Url.find({ userId }).sort({ date: -1 });
     res.json(urls);
   } catch (err) {
     console.log(err.message);

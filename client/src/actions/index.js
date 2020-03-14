@@ -27,7 +27,19 @@ export const createURL = formValues => async (dispatch, getState) => {
   dispatch({ type: CREATE_URL, payload: response.data });
 };
 
-export const fetchURLS = () => async dispatch => {
-  const response = await urls.get("/urls");
+export const fetchURLS = () => async (dispatch, getState) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  const { userId } = getState().auth;
+  const body = JSON.stringify({ userId });
+  const response = await urls.get("/urls", {
+    params: {
+      userId
+    }
+  });
+  console.log(response);
   dispatch({ type: FETCH_URLS, payload: response.data });
 };

@@ -1,6 +1,6 @@
 import _ from "lodash";
 
-import { CREATE_URL, FETCH_URLS } from "../actions/types";
+import { CREATE_URL, FETCH_URLS, SIGN_OUT, SIGN_IN } from "../actions/types";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -8,6 +8,8 @@ export default (state = {}, action) => {
       return { ...state, [action.payload.id]: action.payload };
     case FETCH_URLS:
       return { ...state, ..._.mapKeys(action.payload, "_id") };
+    case SIGN_OUT:
+      return {};
     default:
       return state;
   }
